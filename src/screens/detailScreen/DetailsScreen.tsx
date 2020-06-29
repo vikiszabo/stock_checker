@@ -4,17 +4,20 @@ import styles from "./DetailsScreen.styles";
 import StockTable from "../../components/StockTable";
 import SvgIcon from "../../../assets/images/back.svgx";
 import { VictoryLine, VictoryChart, VictoryTheme } from "victory-native";
+import {useEffect, useState} from "react";
+import axios from "axios";
+import {token} from "../../constants";
 
 
 export interface Props {
-  navigation: any;
-  stock: IStock;
+    navigation: any;
+    symbol: object
 }
 
 export interface State {
-
+    stocks: object;
+    historicalData: object;
 }
-
 const StockData: IStock = {
   symbol: "APPL",
   description: "Apple Inc",
@@ -26,6 +29,28 @@ const StockData: IStock = {
 
 
 const DetailsScreen = (props: Props, state: State) => {
+    const [stock, setStock] = useState();
+    const [historicalData, setHistoricalData] = useState([]);
+
+
+    useEffect(() => {
+        const symbol = props.route.params.symbol.symbol;
+        const getStock = async () => {
+            const stocksResponse = await axios.get(`https://finnhub.io/api/v1/stock/candle?symbol=${symbol}&resolution=1&from=1572651390&to=1572910590&token=${token}`);
+            setStock(stocksResponse.data);
+            if (stocksResponse.data.c) {
+                const data = stocksResponse.data.c.map((item, index) => {
+                    return {x: index, y: item};
+                    // return {x: data.data.t[index], y: item};
+                });
+                setHistoricalData(data);
+            }
+        //    console.log(historicalData);
+        };
+        getStock();
+        console.log(stock);
+    }, []);
+
   return (
       <Container style={styles.container}>
         <Header style={styles.header}>
@@ -36,7 +61,7 @@ const DetailsScreen = (props: Props, state: State) => {
           </Left>
           <Right />
         </Header>
-        <StockTable stock={StockData}/>
+        <StockTable stock={stock} symbol={props.route.params.symbol} />
 
           <VictoryChart
               theme={VictoryTheme.material}
@@ -48,13 +73,7 @@ const DetailsScreen = (props: Props, state: State) => {
                       parent: { border: "1px solid #ccc"}
                   }}
                   interpolation="natural"
-                  data={[
-                      { x: 1, y: 2 },
-                      { x: 2, y: 3 },
-                      { x: 3, y: 5 },
-                      { x: 4, y: 4 },
-                      { x: 5, y: 7 }
-                  ]}
+                  data={historicalData}
               />
           </VictoryChart>
       </Container>

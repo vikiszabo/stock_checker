@@ -34,6 +34,7 @@
     "@react-navigation/bottom-tabs": "^5.6.1",
     "@react-navigation/native": "^5.6.1",
     "@react-navigation/stack": "^5.6.2",
+    "axios": "^0.19.2",
     "expo": "~38.0.4",
     "expo-asset": "~8.1.7",
     "expo-constants": "~9.1.1",
@@ -73,7 +74,6 @@
   },
   "private": true,
   "metro": {
-    "server": {
-    }
+    "server": {}
   }
 }

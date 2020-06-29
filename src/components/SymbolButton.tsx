@@ -4,14 +4,14 @@ import {StyleSheet} from "react-native";
 
 type Props = {
     style?: {},
-    onSubmitButton: () => {}
+    onPress: any
 }
 
 const SymbolButton = (props: Props) => {
-    return <Button
-        primary
-        onPress={props.onSubmitButton}
-        style={{...styles.submitButton, ...props.style}}
+    return <Button {...props}
+                   primary
+                   onPress={props.onPress}
+                   style={{...styles.submitButton, ...props.style}}
     >
         <Text style={{...styles.submitButtonText, ...props.style}}>GO</Text>
     </Button>;

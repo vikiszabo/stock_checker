@@ -6,7 +6,9 @@ import {KeyboardAvoidingView, ScrollView, View} from "react-native";
 import SymbolInput from "../../components/SymbolInput";
 import SymbolButton from "../../components/SymbolButton";
 import ErrorMessage from "../../components/ErrorMessage";
-
+import {useEffect} from "react";
+import axios from "axios";
+import {token} from "../../constants";
 
 
 export interface Props {
@@ -14,25 +16,45 @@ export interface Props {
 }
 
 export interface State {
-
+  error: boolean;
+  isFocused: boolean;
+  enteredSymbol: string;
+  symbols: [];
 }
 
 const FormScreen = (props: Props, state: State) => {
   const [error, setError] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
   const [enteredSymbol, setEnteredSymbol] = useState("");
+  const [symbols, setSymbols] = useState([]);
 
-  const onFormSubmit = () => {};
+
+  useEffect(() => {
+    async function getSymbols() {
+      const symbols = await axios.get(`https://finnhub.io/api/v1/stock/symbol?exchange=US&token=${token}`);
+      const symbolsTickers = symbols.data
+      setSymbols(symbolsTickers);
+      console.log(symbols);
+    }
+      getSymbols();
+  }, []);
+
 
   const onSymbolInputChanged = (text: string) => {
-    // console.log('onSymbolInputChanged: ', text);
     setEnteredSymbol(text);
   };
 
 
   const onSubmitButtonPressed = () => {
-    // console.log('onSubmitButtonPressed - clicked');
-
+    console.log("submit");
+    const symbol = symbols.find(item => item.symbol === enteredSymbol);
+    console.log(symbol);
+    if (!symbol) {
+      setError(true);
+    } else {
+      setError(false);
+      props.navigation.navigate("DetailsScreen", {symbol});
+    }
   };
   return (
       <Container style={styles.container}>
@@ -46,10 +68,11 @@ const FormScreen = (props: Props, state: State) => {
               <SymbolInput onBlur={() => setIsFocused(false)}
                            onFocus={() => setIsFocused(true)}
                            value={enteredSymbol}
-                           onChange={onSymbolInputChanged}
+                           onChangeText={onSymbolInputChanged}
                            style={error && styles.inputError || (isFocused || enteredSymbol !== "") && styles.inputFocused}/>
             </Form>
-            <SymbolButton style={(isFocused || enteredSymbol !== "") && styles.button} onSubmitButton={() => onSubmitButtonPressed}/>
+            <SymbolButton style={(isFocused || enteredSymbol !== "") && styles.button}
+                          onPress={onSubmitButtonPressed}/>
           </KeyboardAvoidingView>
         </ScrollView>
       </Container>

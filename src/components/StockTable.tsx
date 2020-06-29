@@ -3,32 +3,33 @@ import React from "react";
 import {StyleSheet, View} from "react-native";
 
 export interface Props {
-    navigation?: any;
-    stock: Stock;
-    style?: {};
+    navigation: any;
+    stock: object;
+    symbol: object;
+    style?: object;
 }
 
 const StockTable = (props: Props) => {
     return <Content padder>
-        <Text style={{...styles.symbolText, ...props.style}}>{props.stock.symbol}</Text>
+        <Text style={{...styles.symbolText, ...props.style}}>{props.symbol.symbol}</Text>
         <View style={{...styles.descriptionContainerView, ...props.style}}>
-            <Text style={{...styles.descriptionText, ...props.style}}>{props.stock.description} </Text>
+            <Text style={{...styles.descriptionText, ...props.style}}>{props.symbol.description} </Text>
             <Text style={{...styles.currentValueText, ...props.style}} >
-                ${props.stock.currentValue}
+
             </Text>
         </View>
     <View style={{...styles.priceTableView, ...props.style}}>
         <View>
             <Text style={{...styles.priceTitles, ...props.style}}>Open</Text>
-            <Text style={{...styles.prices, ...props.style}}>{props.stock.openPrice}</Text>
+            <Text style={{...styles.prices, ...props.style}}></Text>
         </View>
         <View>
             <Text style={{...styles.priceTitles, ...props.style}}> High</Text>
-            <Text style={{...styles.prices, ...props.style}}>{props.stock.highPrice}</Text>
+            <Text style={{...styles.prices, ...props.style}}></Text>
         </View>
         <View>
             <Text style={{...styles.priceTitles, ...props.style}}>Low</Text>
-            <Text style={{...styles.prices, ...props.style}}>{props.stock.lowPrice}</Text>
+            <Text style={{...styles.prices, ...props.style}}></Text>
         </View>
     </View>
     </Content>

@@ -6,12 +6,15 @@ interface Props {
     onBlur: () => void,
     onFocus: () => void,
     value: string,
-    onChange: any
+    onChangeText: any
 }
 
 const SymbolInput = (props: Props) => {
-    return  <TextInput maxLength={3} {...props} style={{...styles.input, ...props.style}}
-        placeholder="VOO"
+    return  <TextInput  {...props}
+                        maxLength={5}
+                        autoCapitalize="characters"
+                        style={{...styles.input, ...props.style}}
+                        placeholder="VOO"
     />;
 };
 

@@ -43,7 +43,7 @@ const DetailsScreen = (props: Props, state: State) => {
 
     const symbol: string = props.route.params.symbol.symbol;
     const stockURL: string = `${BASE_URL}/quote?symbol=${symbol}&token=${token}`;
-    const historicalDataURL: string = `${BASE_URL}/stock/candle?symbol=${symbol}&resolution=1&from=${oneYearBeforeDate}&to=${currentDate}&token=${token}`;
+    const historicalDataURL: string = `${BASE_URL}/stock/candle?symbol=${symbol}&resolution=D&from=${oneYearBeforeDate}&to=${currentDate}&token=${token}`;
 
     useEffect(() => {
         getStock();
@@ -80,7 +80,7 @@ const DetailsScreen = (props: Props, state: State) => {
     const handleGoBack = () => {
         setHistoricalData([]);
         setStock({});
-        props.navigation.goBack(null);
+        props.navigation.goBack();
     };
     return (
         <Container style={styles.container}>

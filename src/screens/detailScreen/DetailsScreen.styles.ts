@@ -1,15 +1,10 @@
-import {Dimensions, StyleSheet} from "react-native";
-
-const { width: viewportWidth, height: viewportHeight } = Dimensions.get(
-    "window"
-);
+import {StyleSheet} from "react-native";
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#000"
   },
   header: {
-    marginTop: 20,
     backgroundColor: "#000",
     borderBottomWidth: 0
   },

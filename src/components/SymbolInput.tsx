@@ -6,7 +6,7 @@ interface Props {
     onBlur(): void,
     onFocus(): void,
     value: string,
-    onChangeText(): void
+    onChangeText(text: string): void
 }
 
 const SymbolInput = (props: Props) => {

@@ -14,12 +14,12 @@ export default function useCachedResources() {
 
         // Load fonts
         await Font.loadAsync({
-          ...Ionicons.font,
+          'Roboto': require('native-base/Fonts/Roboto.ttf'),
+          'Roboto_medium': require('native-base/Fonts/Roboto_medium.ttf'),
           "AvenirNextLTPro-Bold": require("../../assets/fonts/AvenirNextLTPro-Bold.otf"),
           "AvenirNextLTPro-It": require("../../assets/fonts/AvenirNextLTPro-It.otf"),
           "AvenirNextLTPro-Regular": require("../../assets/fonts/AvenirNextLTPro-Regular.otf"),
-          "Roboto": require("native-base/Fonts/Roboto.ttf"),
-          "Roboto_medium": require("native-base/Fonts/Roboto_medium.ttf"),
+          ...Ionicons.font,
         });
       } catch (e) {
         // We might want to provide this error information to an error reporting service

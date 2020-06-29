@@ -1,17 +1,18 @@
 import * as React from "react";
-import {memo, useState, useEffect} from "react";
-import {Container, Form, Text} from "native-base";
-import styles from "./FormScreen.styles";
-import {KeyboardAvoidingView, ScrollView, View} from "react-native";
+import { memo, useState, useEffect } from "react";
+import { Container, Form, Text } from "native-base";
+import { KeyboardAvoidingView, ScrollView, View } from "react-native";
+import axios from "axios";
+import { StackNavigationProp} from "@react-navigation/stack";
+import { RouteProp } from "@react-navigation/native";
+
 import SymbolInput from "../../components/SymbolInput";
 import SymbolButton from "../../components/SymbolButton";
 import ErrorMessage from "../../components/ErrorMessage";
-import axios from "axios";
-import {BASE_URL, token} from "../../constants";
-import {StackNavigationProp} from "@react-navigation/stack";
-import {AppStackParamList} from "../../navigation/AppNavigator";
-import {RouteProp} from "@react-navigation/native";
+import { BASE_URL, token } from "../../constants";
+import { AppStackParamList } from "../../navigation/AppNavigator";
 
+import styles from "./FormScreen.styles";
 
 type FormScreenNavigationProp = StackNavigationProp<
     AppStackParamList,
@@ -30,7 +31,6 @@ export interface State {
   symbols: [];
 }
 
-type SymbolResponse = {data: ISymbol[]}
 
 const FormScreen = (props: Props, state: State) => {
   const [error, setError] = useState(false);
@@ -44,38 +44,44 @@ const FormScreen = (props: Props, state: State) => {
     getSymbols();
   }, []);
 
-
   const getSymbols = async () => {
     await axios.get(symbolURL)
         .then( response => {
-          console.log(response);
               const symbolResponse = response.data;
               setSymbols(symbolResponse);
             }
         )
-        .catch(err => {
-          setErrorMsg(err);
+        .catch(error => {
+          setError(true);
+          setErrorMsg(error.message);
         })
   };
 
   const onSymbolInputChanged = (text: string) => {
-    setEnteredSymbol(text);
+    setEnteredSymbol(text.replace(" ", ""));
+    const symbol = symbols.find(item => item.symbol === text);
+    if (symbol) {
+      setError(false);
+    } else {
+      setError(true);
+      setErrorMsg("This is not a valid Ticker Symbol!");
+    }
   };
-
 
   const onSubmitButtonPressed = () => {
     const symbol = symbols.find(item => item.symbol === enteredSymbol);
-    if (!symbol) {
-      setError(true);
-    } else {
+    if (symbol) {
       setError(false);
-      setErrorMsg("This is not a valid Ticker ISymbol!");
-      props.navigation.navigate("DetailsScreen", {symbol});
+      props.navigation.navigate("DetailsScreen", { symbol });
+    } else {
+      setError(true);
+      setErrorMsg("This is not a valid Ticker Symbol!");
     }
   };
+
   return (
       <Container style={styles.container}>
-        {error && <ErrorMessage errorMsg={errorMsg}/>}
+        {error && <ErrorMessage errorMsg={errorMsg} />}
         <ScrollView>
           <KeyboardAvoidingView style={styles.content} behavior="padding" enabled>
             <Form style={styles.form}>
@@ -86,9 +92,9 @@ const FormScreen = (props: Props, state: State) => {
                            onFocus={() => setIsFocused(true)}
                            value={enteredSymbol}
                            onChangeText={onSymbolInputChanged}
-                           style={error && styles.inputError || (isFocused || enteredSymbol !== "") && styles.inputFocused}/>
+                           style={error && styles.inputError || (isFocused || enteredSymbol.length !== 0) && styles.inputFocused}/>
             </Form>
-            <SymbolButton style={(isFocused || enteredSymbol !== "") && styles.button}
+            <SymbolButton style={(isFocused || enteredSymbol.length !== 0) && styles.button}
                           onPress={onSubmitButtonPressed}/>
           </KeyboardAvoidingView>
         </ScrollView>

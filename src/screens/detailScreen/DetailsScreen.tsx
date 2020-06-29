@@ -1,16 +1,18 @@
-import * as React from "react";
-import {Button, Container, Content, Header, Left, Right, Spinner} from "native-base";
-import styles from "./DetailsScreen.styles";
-import StockTable from "../../components/StockTable";
-import SvgIcon from "../../../assets/images/back.svgx";
-import {memo, useEffect, useState} from "react";
-import axios from "axios";
-import {BASE_URL, token} from "../../constants";
-import StockLineChart from "../../components/StockLineChart";
-import {StackNavigationProp} from "@react-navigation/stack";
+import React, { memo, useEffect, useState } from "react";
+import { Button, Container, Content, Header, Left, Right, Spinner } from "native-base";
+import { StackNavigationProp } from "@react-navigation/stack";
 import { RouteProp } from '@react-navigation/native';
-import {AppStackParamList} from "../../navigation/AppNavigator";
+import axios from "axios";
 
+import StockTable from "../../components/StockTable";
+import { BASE_URL, token } from "../../constants";
+import StockLineChart from "../../components/StockLineChart";
+import { AppStackParamList } from "../../navigation/AppNavigator";
+
+import SvgIcon from "../../../assets/images/back.svgx";
+
+import styles from "./DetailsScreen.styles";
+import { StatusBar } from "react-native";
 
 type DetailsScreenNavigationProp = StackNavigationProp<
     AppStackParamList,
@@ -85,6 +87,7 @@ const DetailsScreen = (props: Props, state: State) => {
     return (
         <Container style={styles.container}>
             <Header style={styles.header}>
+                <StatusBar barStyle="light-content" />
                 <Left>
                     <Button transparent onPress={() => handleGoBack()}>
                         <SvgIcon />

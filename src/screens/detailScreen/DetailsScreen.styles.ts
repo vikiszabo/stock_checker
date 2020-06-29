@@ -8,7 +8,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#000",
     borderBottomWidth: 0
   },
-  headerIcon: {},
 
   symbolText: {
     marginRight: 4,

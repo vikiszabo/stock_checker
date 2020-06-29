@@ -1,38 +1,37 @@
-import {Content, Text} from "native-base";
+import {Text} from "native-base";
 import React from "react";
 import {StyleSheet, View} from "react-native";
 
 export interface Props {
-    navigation: any;
     stock: object;
     symbol: object;
     style?: object;
 }
 
 const StockTable = (props: Props) => {
-    return <Content padder>
+    return <View>
         <Text style={{...styles.symbolText, ...props.style}}>{props.symbol.symbol}</Text>
         <View style={{...styles.descriptionContainerView, ...props.style}}>
             <Text style={{...styles.descriptionText, ...props.style}}>{props.symbol.description} </Text>
             <Text style={{...styles.currentValueText, ...props.style}} >
-
+                ${props.stock.c}
             </Text>
         </View>
     <View style={{...styles.priceTableView, ...props.style}}>
         <View>
             <Text style={{...styles.priceTitles, ...props.style}}>Open</Text>
-            <Text style={{...styles.prices, ...props.style}}></Text>
+            <Text style={{...styles.prices, ...props.style}}>{props.stock.o}</Text>
         </View>
         <View>
             <Text style={{...styles.priceTitles, ...props.style}}> High</Text>
-            <Text style={{...styles.prices, ...props.style}}></Text>
+            <Text style={{...styles.prices, ...props.style}}>{props.stock.h}</Text>
         </View>
         <View>
             <Text style={{...styles.priceTitles, ...props.style}}>Low</Text>
-            <Text style={{...styles.prices, ...props.style}}></Text>
+            <Text style={{...styles.prices, ...props.style}}>{props.stock.l}</Text>
         </View>
     </View>
-    </Content>
+        </View>
 };
 
 const styles = StyleSheet.create({

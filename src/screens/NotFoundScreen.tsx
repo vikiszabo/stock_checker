@@ -5,15 +5,11 @@ export interface Props {
   navigation: any;
 }
 
-export interface State {
-
-}
-
-const NotFoundScreen = (props: Props, state: State) => {
+const NotFoundScreen = (props: Props) => {
   return (
       <View style={styles.container}>
         <Text style={styles.title}>This screen doesn't exist.</Text>
-        <TouchableOpacity onPress={() => {}} style={styles.link}>
+        <TouchableOpacity onPress={() => { props.navigation.navigate("FormScreen");}} style={styles.link}>
           <Text style={styles.linkText}>Go to home screen!</Text>
         </TouchableOpacity>
       </View>

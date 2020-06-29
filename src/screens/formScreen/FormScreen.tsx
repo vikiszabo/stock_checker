@@ -1,14 +1,13 @@
 import * as React from "react";
-import {useState} from "react";
+import {memo, useState, useEffect} from "react";
 import {Container, Form, Text} from "native-base";
 import styles from "./FormScreen.styles";
 import {KeyboardAvoidingView, ScrollView, View} from "react-native";
 import SymbolInput from "../../components/SymbolInput";
 import SymbolButton from "../../components/SymbolButton";
 import ErrorMessage from "../../components/ErrorMessage";
-import {useEffect} from "react";
 import axios from "axios";
-import {token} from "../../constants";
+import {BASE_URL, token} from "../../constants";
 
 
 export interface Props {
@@ -31,8 +30,8 @@ const FormScreen = (props: Props, state: State) => {
 
   useEffect(() => {
     async function getSymbols() {
-      const symbols = await axios.get(`https://finnhub.io/api/v1/stock/symbol?exchange=US&token=${token}`);
-      const symbolsTickers = symbols.data
+      const symbols = await axios.get(`${BASE_URL}/stock/symbol?exchange=US&token=${token}`);
+      const symbolsTickers = symbols.data;
       setSymbols(symbolsTickers);
       console.log(symbols);
     }
@@ -46,9 +45,7 @@ const FormScreen = (props: Props, state: State) => {
 
 
   const onSubmitButtonPressed = () => {
-    console.log("submit");
     const symbol = symbols.find(item => item.symbol === enteredSymbol);
-    console.log(symbol);
     if (!symbol) {
       setError(true);
     } else {
@@ -79,4 +76,4 @@ const FormScreen = (props: Props, state: State) => {
   );
 };
 
-export default FormScreen;
+export default memo(FormScreen);

@@ -8,10 +8,19 @@ import SymbolButton from "../../components/SymbolButton";
 import ErrorMessage from "../../components/ErrorMessage";
 import axios from "axios";
 import {BASE_URL, token} from "../../constants";
+import {StackNavigationProp} from "@react-navigation/stack";
+import {AppStackParamList} from "../../navigation/AppNavigator";
+import {RouteProp} from "@react-navigation/native";
+
+
+type FormScreenNavigationProp = StackNavigationProp<
+    AppStackParamList,
+    'FormScreen'
+    >;
 
 
 export interface Props {
-  navigation: any;
+  navigation: FormScreenNavigationProp;
 }
 
 export interface State {
@@ -23,21 +32,31 @@ export interface State {
 
 const FormScreen = (props: Props, state: State) => {
   const [error, setError] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<string>("");
   const [isFocused, setIsFocused] = useState(false);
   const [enteredSymbol, setEnteredSymbol] = useState("");
   const [symbols, setSymbols] = useState([]);
-
+  const symbolURL = `${BASE_URL}/stock/symbol?exchange=US&token=${token}`;
 
   useEffect(() => {
-    async function getSymbols() {
-      const symbols = await axios.get(`${BASE_URL}/stock/symbol?exchange=US&token=${token}`);
-      const symbolsTickers = symbols.data;
-      setSymbols(symbolsTickers);
-      console.log(symbols);
-    }
-      getSymbols();
+    getSymbols();
   }, []);
 
+
+  const getSymbols = async () => {
+    await axios.get(symbolURL)
+        .then( response => {
+          console.log(response);
+              const symbolResponse = response.data;
+              setSymbols(symbolResponse);
+              console.log(symbols);
+            }
+        )
+        .catch(err => {
+          setErrorMsg(err);
+          console.log(errorMsg)
+        })
+  };
 
   const onSymbolInputChanged = (text: string) => {
     setEnteredSymbol(text);
@@ -50,12 +69,13 @@ const FormScreen = (props: Props, state: State) => {
       setError(true);
     } else {
       setError(false);
+      setErrorMsg("This is not a valid Ticker Symbol!");
       props.navigation.navigate("DetailsScreen", {symbol});
     }
   };
   return (
       <Container style={styles.container}>
-        {error && <ErrorMessage/> }
+        {error && <ErrorMessage errorMsg={errorMsg}/>}
         <ScrollView>
           <KeyboardAvoidingView style={styles.content} behavior="padding" enabled>
             <Form style={styles.form}>

@@ -2,9 +2,13 @@ import React from "react";
 import {StyleSheet, View} from "react-native";
 import {Text} from "native-base";
 
-const ErrorMessage = (props: any) => {
+interface Props {
+    errorMsg?: string
+}
+
+const ErrorMessage = (props: Props) => {
     return  <View style={styles.errorView}>
-        <Text style={styles.errorText}>This is not a valid Ticker Symbol</Text>
+        <Text style={styles.errorText}>{props.errorMsg}</Text>
     </View>;
 };
 

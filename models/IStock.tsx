@@ -1,4 +1,4 @@
-interface IStock {
+interface Stock {
     symbol: string;
     description: string;
     currentValue: number;

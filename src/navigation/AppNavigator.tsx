@@ -5,8 +5,10 @@ import DetailsScreen from "../screens/detailScreen/DetailsScreen";
 import NotFoundScreen from "../screens/NotFoundScreen";
 import FormScreen from "../screens/formScreen/FormScreen";
 
-
-const AppStack = createStackNavigator();
+export type AppStackParamList = {
+    DetailScreen: { symbol: Symbol };
+};
+const AppStack = createStackNavigator<AppStackParamList>();
 
 const AppNavigator = (props:any) => {
     return <NavigationContainer>

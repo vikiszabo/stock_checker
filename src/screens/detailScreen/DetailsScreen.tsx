@@ -7,53 +7,75 @@ import {memo, useEffect, useState} from "react";
 import axios from "axios";
 import {BASE_URL, token} from "../../constants";
 import StockLineChart from "../../components/StockLineChart";
+import {StackNavigationProp} from "@react-navigation/stack";
+import { RouteProp } from '@react-navigation/native';
+import {AppStackParamList} from "../../navigation/AppNavigator";
+
+
+type DetailsScreenNavigationProp = StackNavigationProp<
+    AppStackParamList,
+    'DetailScreen'
+    >;
+
+type DetailsScreenRouteProp = RouteProp<AppStackParamList, 'DetailScreen'>;
 
 export interface Props {
-    navigation: any;
-    symbol: object
+    navigation: DetailsScreenNavigationProp;
+    route: DetailsScreenRouteProp;
+    symbol: Symbol
 }
 
 export interface State {
-    stock: object;
-    historicalData: [];
+    stock: Stock;
+    historicalData: number[];
 }
 
+type StockResponse = {data: Stock}
+
 const DetailsScreen = (props: Props, state: State) => {
-    const [stock, setStock] = useState({});
-    const [historicalData, setHistoricalData] = useState([]);
+    const [stock, setStock] = useState<object>({});
+    const [historicalData, setHistoricalData] = useState<number[]>([]);
 
-    const [yRange, setYRange] = useState<number[]>([0,]);
-    const date: any = new Date();
-    const currentDate= Math.floor(date / 1000);
+    const date: Date = new Date();
+    const currentDate: number = Math.floor(date / 1000);
     date.setFullYear( date.getFullYear() - 1 );
-    const oneYearBeforeDate = Math.floor(date / 1000);
+    const oneYearBeforeDate: number = Math.floor(date / 1000);
 
-
-
-    const symbol = props.route.params.symbol.symbol;
-    const getStock = async () => {
-        const stocksResponse = await axios.get(`${BASE_URL}/quote?symbol=${symbol}&token=${token}`);
-        console.log('STOCK: ', stocksResponse.data);
-        if(stocksResponse.data) {
-            setStock(stocksResponse.data);
-        }
-    };
-
-    const getHistorycalData = async () => {
-        const dataResponse = await axios.get(`${BASE_URL}/stock/candle?symbol=${symbol}&resolution=1&from=${oneYearBeforeDate}&to=${currentDate}&token=${token}`);
-        if (dataResponse.data.c) {
-            const data = dataResponse.data.c.map((item, index) => {
-                const date = new Date(dataResponse.data.t[index] * 1000);
-                return {x: date, y: item};
-            });
-            setHistoricalData(data);
-        }
-    };
+    const symbol: string = props.route.params.symbol.symbol;
+    const stockURL: string = `${BASE_URL}/quote?symbol=${symbol}&token=${token}`;
+    const historicalDataURL: string = `${BASE_URL}/stock/candle?symbol=${symbol}&resolution=1&from=${oneYearBeforeDate}&to=${currentDate}&token=${token}`;
 
     useEffect(() => {
         getStock();
         getHistorycalData();
     }, []);
+
+    const getStock = async () => {
+         await axios.get<StockResponse>(stockURL)
+            .then( response => {
+                  const stockResponse = response.data;
+                  setStock(stockResponse);
+                }
+            )
+            .catch(err => {
+                console.log(err)
+            })
+        };
+
+    const getHistorycalData = async () => {
+        await axios.get(historicalDataURL)
+            .then(response => {
+                const dataResponse = response.data;
+                const data = dataResponse.c.map((item, index) => {
+                    const date = new Date(dataResponse.t[index] * 1000);
+                    return {x: date, y: item};
+                });
+                setHistoricalData(data);
+            })
+            .catch(err => {
+                console.log(err)
+            });
+    };
 
     const handleGoBack = () => {
         setHistoricalData([]);

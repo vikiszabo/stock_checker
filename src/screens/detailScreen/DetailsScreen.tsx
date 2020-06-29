@@ -22,15 +22,15 @@ type DetailsScreenRouteProp = RouteProp<AppStackParamList, 'DetailScreen'>;
 export interface Props {
     navigation: DetailsScreenNavigationProp;
     route: DetailsScreenRouteProp;
-    symbol: Symbol
+    symbol: ISymbol
 }
 
 export interface State {
-    stock: Stock;
+    stock: IStock;
     historicalData: number[];
 }
 
-type StockResponse = {data: Stock}
+type StockResponse = {data: IStock}
 
 const DetailsScreen = (props: Props, state: State) => {
     const [stock, setStock] = useState<object>({});

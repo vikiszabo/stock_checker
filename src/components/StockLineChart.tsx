@@ -1,4 +1,4 @@
-import React from "react";
+import React, {memo} from "react";
 import {VictoryChart, VictoryLine, VictoryTheme} from "victory-native";
 
 
@@ -26,7 +26,7 @@ const StockLineChart = (props: Props) => {
 
 };
 
-export default StockLineChart;
+export default memo(StockLineChart);
 
 
 

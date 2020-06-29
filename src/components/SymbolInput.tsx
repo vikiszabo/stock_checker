@@ -2,11 +2,11 @@ import React from "react";
 import {StyleSheet, TextInput} from "react-native";
 
 interface Props {
-    style?: {},
-    onBlur: () => void,
-    onFocus: () => void,
+    style?: object,
+    onBlur(): void,
+    onFocus(): void,
     value: string,
-    onChangeText: any
+    onChangeText(): void
 }
 
 const SymbolInput = (props: Props) => {

@@ -30,6 +30,8 @@ export interface State {
   symbols: [];
 }
 
+type SymbolResponse = {data: ISymbol[]}
+
 const FormScreen = (props: Props, state: State) => {
   const [error, setError] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string>("");
@@ -49,12 +51,10 @@ const FormScreen = (props: Props, state: State) => {
           console.log(response);
               const symbolResponse = response.data;
               setSymbols(symbolResponse);
-              console.log(symbols);
             }
         )
         .catch(err => {
           setErrorMsg(err);
-          console.log(errorMsg)
         })
   };
 
@@ -69,7 +69,7 @@ const FormScreen = (props: Props, state: State) => {
       setError(true);
     } else {
       setError(false);
-      setErrorMsg("This is not a valid Ticker Symbol!");
+      setErrorMsg("This is not a valid Ticker ISymbol!");
       props.navigation.navigate("DetailsScreen", {symbol});
     }
   };

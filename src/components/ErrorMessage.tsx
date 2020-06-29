@@ -1,9 +1,9 @@
-import React from "react";
+import React, {memo} from "react";
 import {StyleSheet, View} from "react-native";
 import {Text} from "native-base";
 
 interface Props {
-    errorMsg?: string
+    errorMsg: string
 }
 
 const ErrorMessage = (props: Props) => {
@@ -30,4 +30,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default ErrorMessage;
+export default memo(ErrorMessage);

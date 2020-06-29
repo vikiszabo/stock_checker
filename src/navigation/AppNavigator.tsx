@@ -6,7 +6,7 @@ import NotFoundScreen from "../screens/NotFoundScreen";
 import FormScreen from "../screens/formScreen/FormScreen";
 
 export type AppStackParamList = {
-    DetailScreen: { symbol: Symbol };
+    DetailScreen: { symbol: ISymbol };
 };
 const AppStack = createStackNavigator<AppStackParamList>();
 

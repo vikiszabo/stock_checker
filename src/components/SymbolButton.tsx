@@ -3,8 +3,8 @@ import React from "react";
 import {StyleSheet} from "react-native";
 
 type Props = {
-    style?: {},
-    onPress: any
+    style?: object,
+    onPress(): void
 }
 
 const SymbolButton = (props: Props) => {

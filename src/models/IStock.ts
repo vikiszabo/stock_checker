@@ -1,4 +1,4 @@
-interface Stock {
+interface IStock {
     o: number,
     h: number,
     c: number,

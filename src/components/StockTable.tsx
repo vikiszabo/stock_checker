@@ -1,5 +1,5 @@
 import {Text} from "native-base";
-import React from "react";
+import React, {memo} from "react";
 import {StyleSheet, View} from "react-native";
 
 export interface Props {
@@ -96,4 +96,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default StockTable;
+export default memo(StockTable);

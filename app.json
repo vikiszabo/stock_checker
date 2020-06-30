@@ -1,6 +1,7 @@
 {
   "expo": {
     "name": "StockChecker",
+    "description": "A stock checker app to help you keeping an eye on your investments.",
     "slug": "StockChecker",
     "version": "1.0.0",
     "orientation": "portrait",

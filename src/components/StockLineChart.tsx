@@ -1,28 +1,15 @@
 import React, {memo} from "react";
 import {VictoryChart, VictoryLine, VictoryTheme} from "victory-native";
+import {replaceRobotoWithSystemFont} from "../utils";
+import colors from "../constants/colors";
 
+const themeWithSystemFont = replaceRobotoWithSystemFont({...VictoryTheme.material});
 
 interface StockLineChartProps {
     stock: IStock;
     symbol: ISymbol;
     historicalData: number[];
 }
-
-const replaceRobotoWithSystemFont = (obj: any) => {
-    const keys = Object.keys(obj);
-    keys.forEach(function(key) {
-        const value = obj[key];
-        if (key === 'fontFamily') {
-            obj[key] = obj[key].replace("'Roboto',", "'System',");
-        }
-        if (typeof value === 'object') {
-            replaceRobotoWithSystemFont(obj[key]);
-        }
-    });
-    return obj;
-};
-
-const themeWithSystemFont = replaceRobotoWithSystemFont({...VictoryTheme.material});
 
 const StockLineChart: React.FC<StockLineChartProps> = props => {
     return <VictoryChart
@@ -31,7 +18,7 @@ const StockLineChart: React.FC<StockLineChartProps> = props => {
     >
         <VictoryLine
             style={{
-                data: { stroke: "#E9563E" },
+                data: { stroke: colors.primary },
                 parent: { border: "1px solid #ccc"}
             }}
             interpolation="natural"

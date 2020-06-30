@@ -1,12 +1,13 @@
 import {useState} from "react";
 
-
-export default function useAsyncState(initialValue) {
+const useAsyncState = (initialValue: any) => {
     const [value, setValue] = useState(initialValue);
-    const setter = x =>
+    const setter = (arg: any) =>
         new Promise(resolve => {
-            setValue(x);
-            resolve(x);
+            setValue(arg);
+            resolve(arg);
         });
     return [value, setter];
-}
+};
+
+export default useAsyncState;

@@ -24,17 +24,10 @@ interface FormScreenProps {
   navigation: FormScreenNavigationProp;
 }
 
-interface FormScreenState {
-  error: boolean;
-  isFocused: boolean;
-  enteredSymbol: string;
-  symbols: [];
-}
-
 
 const FormScreen: React.FC<FormScreenProps> = props => {
   const [error, setError] = useAsyncState(false);
-  const [errorMsg, setErrorMsg] = useAsyncState<string>("");
+  const [errorMsg, setErrorMsg] = useAsyncState("");
   const [isFocused, setIsFocused] = useState(false);
   const [enteredSymbol, setEnteredSymbol] = useState("");
   const [symbols, setSymbols] = useState([]);

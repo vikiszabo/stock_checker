@@ -9,7 +9,7 @@ export interface StockTableProps {
 }
 
 const StockTable: React.FC<StockTableProps> = props => {
-    return <View>
+    return <View style={styles.container}>
         <Text style={{...styles.symbolText, ...props.style}}>{props.symbol.symbol}</Text>
         <View style={{...styles.descriptionContainerView, ...props.style}}>
             <Text style={{...styles.descriptionText, ...props.style}}>{props.symbol.description} </Text>
@@ -35,8 +35,11 @@ const StockTable: React.FC<StockTableProps> = props => {
 };
 
 const styles = StyleSheet.create({
+    container: {
+        marginLeft: 4
+    },
     symbolText: {
-        marginRight: 4,
+        marginLeft: 8,
         padding: 5,
         fontFamily: "AvenirNextLTPro-Regular",
         fontSize: 15,
@@ -58,27 +61,12 @@ const styles = StyleSheet.create({
         color: "#FFF"
     },
     priceTableView: {
-        margin: 4,
         marginRight: 30,
-        padding: 5,
+        paddingVertical: 4,
         display: "flex",
         flexDirection: "row",
         justifyContent: "space-between",
     },
-    priceTitleContainerView: {
-        marginBottom: 2,
-        padding: 5,
-        flex: 1,
-        flexDirection: "row",
-        justifyContent: "space-between"
-    },
-    priceContainerView: {
-        padding: 5,
-        flex: 1,
-        flexDirection: "row",
-        justifyContent: "space-between"
-    },
-
     priceTitles: {
         marginLeft: 4,
         padding: 5,
@@ -86,7 +74,6 @@ const styles = StyleSheet.create({
         fontSize: 17,
         color: "#FFF"
     },
-
     prices: {
         margin: 4,
         padding: 5,

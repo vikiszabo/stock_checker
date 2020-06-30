@@ -2,6 +2,7 @@ import * as React from "react";
 import {StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {AppStackParamList} from "../navigation/AppNavigator";
+import colors from "../constants/colors";
 
 
 type NotFoundScreenNavigationProp = StackNavigationProp<
@@ -45,7 +46,7 @@ const styles = StyleSheet.create({
   },
   linkText: {
     fontSize: 14,
-    color: "#E9563E",
+    color: colors.primary,
       fontFamily: "AvenirNextLTPro-Bold",
   },
 });

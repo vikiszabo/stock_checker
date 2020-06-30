@@ -27,7 +27,7 @@ const themeWithSystemFont = replaceRobotoWithSystemFont({...VictoryTheme.materia
 const StockLineChart: React.FC<StockLineChartProps> = props => {
     return <VictoryChart
         theme={themeWithSystemFont}
-        height={290}
+        height={270}
     >
         <VictoryLine
             style={{

@@ -1,4 +1,5 @@
 import {StyleSheet} from "react-native";
+import color from "../../constants/colors";
 
 const styles = StyleSheet.create({
   container: {
@@ -6,73 +7,19 @@ const styles = StyleSheet.create({
   },
   header: {
     backgroundColor: "#000",
-    borderBottomWidth: 0
+    borderBottomWidth: 0,
+    marginLeft: 4
   },
-
-  symbolText: {
-    marginRight: 4,
-    padding: 5,
-    fontFamily: "AvenirNextLTPro-Regular",
-    fontSize: 15,
-    color: "#FFF"
+  content: {
+    marginLeft: 10
   },
-  descriptionContainerView: {
-    margin: 4
-  },
-  descriptionText: {
-    padding: 5,
-    fontFamily: "AvenirNextLTPro-Bold",
-    fontSize: 28,
-    color: "#FFF"
-  },
-  currentValueText: {
-    padding: 5,
-    fontFamily: "AvenirNextLTPro-Bold",
-    fontSize: 28,
-    color: "#FFF"
-  },
-  priceTableView: {
-    margin: 4,
-    marginRight: 30,
-    padding: 5,
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-  priceTitleContainerView: {
-    marginBottom: 2,
-    padding: 5,
-    flex: 1,
-    flexDirection: "row",
-    justifyContent: "space-between"
-  },
-  priceContainerView: {
-    padding: 5,
-    flex: 1,
-    flexDirection: "row",
-    justifyContent: "space-between"
-  },
-
-  priceTitles: {
-    marginLeft: 4,
-    padding: 5,
-    fontFamily: "AvenirNextLTPro-Regular",
-    fontSize: 17,
-    color: "#FFF"
-  },
-
-  prices: {
-    margin: 4,
-    padding: 5,
-    fontFamily: "AvenirNextLTPro-Bold",
-    fontSize: 17,
-    color: "#FFF"
-  },
-  motionChart: {
-    width: 150,
-    height: 150,
-    backgroundColor: "#FFF",
-    borderRadius: 30
+  divider: {
+    paddingVertical:200,
+    paddingHorizontal:4,
+    color: color.secondaryDark,
+    borderColor: "#FFFFFF",
+    top: 296,
+    position: "absolute"
   }
 });
 

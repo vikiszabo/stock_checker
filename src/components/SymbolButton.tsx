@@ -4,7 +4,7 @@ import {StyleSheet} from "react-native";
 
 type SymbolButtonProps = {
     style?: object,
-    onPress(): void
+    onPress: () => void
 }
 
 const SymbolButton: React.FC<SymbolButtonProps> = props => {

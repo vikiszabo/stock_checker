@@ -8,7 +8,7 @@ import { StackNavigationProp} from "@react-navigation/stack";
 import SymbolInput from "../../components/SymbolInput";
 import SymbolButton from "../../components/SymbolButton";
 import ErrorMessage from "../../components/ErrorMessage";
-import { BASE_URL, token } from "../../constants";
+import { BASE_URL, token } from "../../constants/apiConstants";
 import { AppStackParamList } from "../../navigation/AppNavigator";
 
 import styles from "./FormScreen.styles";
@@ -91,6 +91,7 @@ const FormScreen: React.FC<FormScreenProps> = props => {
                            onFocus={() => setIsFocused(true)}
                            value={enteredSymbol}
                            onChangeText={onSymbolInputChanged}
+                           onSubmitEditing={() => onSubmitButtonPressed()}
                            style={error && styles.inputError || (isFocused || enteredSymbol.length !== 0) && styles.inputFocused}/>
             </Form>
             <SymbolButton style={(isFocused || enteredSymbol.length !== 0) && styles.button}

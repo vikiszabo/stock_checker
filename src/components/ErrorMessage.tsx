@@ -1,6 +1,7 @@
 import React, {memo} from "react";
 import {StyleSheet, View} from "react-native";
 import {Text} from "native-base";
+import colors from "../constants/colors";
 
 interface ErrorMessageProps {
     errorMsg: string
@@ -17,7 +18,7 @@ const styles = StyleSheet.create({
         position: "absolute",
         height: 80,
         width: "100%",
-        backgroundColor: "#E9563E",
+        backgroundColor: colors.primary,
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -26,7 +27,7 @@ const styles = StyleSheet.create({
     errorText: {
         color: "#FFF",
         fontFamily: "AvenirNextLTPro-Regular",
-        fontSize: 17
+        fontSize: 15
     },
 });
 

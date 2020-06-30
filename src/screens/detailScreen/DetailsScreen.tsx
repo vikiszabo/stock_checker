@@ -5,14 +5,14 @@ import { RouteProp } from '@react-navigation/native';
 import axios from "axios";
 
 import StockTable from "../../components/StockTable";
-import { BASE_URL, token } from "../../constants";
+import { BASE_URL, token } from "../../constants/apiConstants";
 import StockLineChart from "../../components/StockLineChart";
 import { AppStackParamList } from "../../navigation/AppNavigator";
 
 import SvgIcon from "../../../assets/images/back.svgx";
 
 import styles from "./DetailsScreen.styles";
-import { StatusBar } from "react-native";
+import {StatusBar, View} from "react-native";
 
 type DetailsScreenNavigationProp = StackNavigationProp<
     AppStackParamList,
@@ -95,7 +95,8 @@ const DetailsScreen: React.FC<DetailsScreenProps> = props => {
                 </Left>
                 <Right />
             </Header>
-            <Content padder>
+            <View style={styles.content}>
+                <View style={styles.divider}></View>
                 <StockTable
                     stock={stock} symbol={props.route.params.symbol} />
                 { historicalData.length > 0
@@ -104,7 +105,7 @@ const DetailsScreen: React.FC<DetailsScreenProps> = props => {
                                     historicalData={historicalData} />
                     :  <Spinner color="#E9563E" />
                 }
-            </Content>
+            </View>
         </Container>
     );
 };

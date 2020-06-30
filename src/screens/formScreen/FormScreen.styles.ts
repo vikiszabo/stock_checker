@@ -1,11 +1,12 @@
 import {Dimensions, StyleSheet} from "react-native";
+import colors from "../../constants/colors";
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#FFFFFF",
   },
   inputError: {
-    borderColor: "#E9563E",
+    borderColor: colors.primary,
   },
   content: {
     display: "flex",

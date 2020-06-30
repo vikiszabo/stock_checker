@@ -3,10 +3,11 @@ import {StyleSheet, TextInput} from "react-native";
 
 interface SymbolInputProps {
     style?: object,
-    onBlur(): void,
-    onFocus(): void,
+    onBlur: () => void,
+    onFocus: () => void,
     value: string,
-    onChangeText(text: string): void
+    onChangeText: (text: string) => void,
+    onSubmitEditing: () => void
 }
 
 const SymbolInput: React.FC<SymbolInputProps> = props => {

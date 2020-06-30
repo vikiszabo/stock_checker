@@ -95,8 +95,8 @@ const DetailsScreen: React.FC<DetailsScreenProps> = props => {
                 </Left>
                 <Right />
             </Header>
+            <View style={styles.divider}/>
             <View style={styles.content}>
-                <View style={styles.divider}></View>
                 <StockTable
                     stock={stock} symbol={props.route.params.symbol} />
                 { historicalData.length > 0

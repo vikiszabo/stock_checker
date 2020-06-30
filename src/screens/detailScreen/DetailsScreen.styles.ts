@@ -14,12 +14,13 @@ const styles = StyleSheet.create({
     marginLeft: 10
   },
   divider: {
-    paddingVertical:200,
-    paddingHorizontal:4,
+    height: 2,
+    width: "100%",
     color: color.secondaryDark,
     borderColor: "#FFFFFF",
     top: 296,
-    position: "absolute"
+    position: "absolute",
+    backgroundColor: color.secondaryDark
   }
 });
 

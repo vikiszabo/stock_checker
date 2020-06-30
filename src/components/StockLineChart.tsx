@@ -14,7 +14,7 @@ interface StockLineChartProps {
 const StockLineChart: React.FC<StockLineChartProps> = props => {
     return <VictoryChart
         theme={themeWithSystemFont}
-        height={270}
+        height={300}
     >
         <VictoryLine
             style={{

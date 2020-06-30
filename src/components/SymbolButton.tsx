@@ -1,6 +1,7 @@
 import {Button, Text} from "native-base";
 import React from "react";
 import {StyleSheet} from "react-native";
+import color from "../constants/colors";
 
 type SymbolButtonProps = {
     style?: object,
@@ -22,7 +23,7 @@ const styles = StyleSheet.create({
         margin: 0,
         padding: 0,
         justifyContent: "center",
-        backgroundColor:  "#ECECEC",
+        backgroundColor:  color.secondaryLigth,
         borderRadius: 0,
         height: 75,
     },

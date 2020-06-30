@@ -1,5 +1,6 @@
 import * as React from "react";
 import { memo, useState, useEffect } from "react";
+import useAsyncState from "../../hooks/useAsyncState";
 import { Container, Form, Text } from "native-base";
 import { KeyboardAvoidingView, ScrollView, View } from "react-native";
 import axios from "axios";
@@ -32,8 +33,8 @@ interface FormScreenState {
 
 
 const FormScreen: React.FC<FormScreenProps> = props => {
-  const [error, setError] = useState(false);
-  const [errorMsg, setErrorMsg] = useState<string>("");
+  const [error, setError] = useAsyncState(false);
+  const [errorMsg, setErrorMsg] = useAsyncState<string>("");
   const [isFocused, setIsFocused] = useState(false);
   const [enteredSymbol, setEnteredSymbol] = useState("");
   const [symbols, setSymbols] = useState([]);
@@ -51,15 +52,13 @@ const FormScreen: React.FC<FormScreenProps> = props => {
             }
         )
         .catch(error => {
-          setError(true);
-          setErrorMsg(error.message);
+          setError(true).then(() => setErrorMsg(error.message));
         })
   };
 
   const onSymbolInputChanged = (text: string) => {
     if (text === "") {
-      setError(false);
-      setEnteredSymbol("");
+      setError(false).then(() => setErrorMsg(error.message));
       return;
     }
 
@@ -69,8 +68,7 @@ const FormScreen: React.FC<FormScreenProps> = props => {
     if (symbol) {
       setError(false);
     } else {
-      setError(true);
-      setErrorMsg("This is not a valid Ticker Symbol!");
+      setError(true).then(() => setErrorMsg("This is not a valid Ticker Symbol!"));
     }
   };
 
@@ -80,8 +78,7 @@ const FormScreen: React.FC<FormScreenProps> = props => {
       setError(false);
       props.navigation.navigate("DetailsScreen", { symbol });
     } else {
-      setError(true);
-      setErrorMsg("This is not a valid Ticker Symbol!");
+      setError(true).then(() => setErrorMsg("This is not a valid Ticker Symbol!"));
     }
   };
 

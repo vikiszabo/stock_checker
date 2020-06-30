@@ -2,11 +2,10 @@ import React, {memo} from "react";
 import {VictoryChart, VictoryLine, VictoryTheme} from "victory-native";
 
 
-export interface Props {
-    stock: object;
-    symbol: object;
-    style?: object;
-    historicalData: any;
+interface StockLineChartProps {
+    stock: IStock;
+    symbol: ISymbol;
+    historicalData: number[];
 }
 
 const replaceRobotoWithSystemFont = (obj: any) => {
@@ -25,7 +24,7 @@ const replaceRobotoWithSystemFont = (obj: any) => {
 
 const themeWithSystemFont = replaceRobotoWithSystemFont({...VictoryTheme.material});
 
-const StockLineChart = (props: Props) => {
+const StockLineChart: React.FC<StockLineChartProps> = props => {
     return <VictoryChart
         theme={themeWithSystemFont}
         height={290}
@@ -39,7 +38,6 @@ const StockLineChart = (props: Props) => {
             data={props.historicalData}
         />
     </VictoryChart>;
-
 };
 
 export default memo(StockLineChart);

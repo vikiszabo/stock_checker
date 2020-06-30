@@ -16,25 +16,25 @@ import { StatusBar } from "react-native";
 
 type DetailsScreenNavigationProp = StackNavigationProp<
     AppStackParamList,
-    'DetailScreen'
+    "DetailScreen"
     >;
 
-type DetailsScreenRouteProp = RouteProp<AppStackParamList, 'DetailScreen'>;
+type DetailsScreenRouteProp = RouteProp<AppStackParamList, "DetailScreen">;
 
-export interface Props {
+interface DetailsScreenProps {
     navigation: DetailsScreenNavigationProp;
     route: DetailsScreenRouteProp;
     symbol: ISymbol
 }
 
-export interface State {
+interface DetailsScreenState {
     stock: IStock;
     historicalData: number[];
 }
 
 type StockResponse = {data: IStock}
 
-const DetailsScreen = (props: Props, state: State) => {
+const DetailsScreen: React.FC<DetailsScreenProps> = props => {
     const [stock, setStock] = useState<object>({});
     const [historicalData, setHistoricalData] = useState<number[]>([]);
 

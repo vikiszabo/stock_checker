@@ -1,11 +1,20 @@
 import * as React from "react";
 import {StyleSheet, Text, TouchableOpacity, View} from "react-native";
+import {StackNavigationProp} from "@react-navigation/stack";
+import {AppStackParamList} from "../navigation/AppNavigator";
 
-export interface Props {
-  navigation: any;
+
+type NotFoundScreenNavigationProp = StackNavigationProp<
+    AppStackParamList,
+    "NotFoundScreen"
+    >;
+
+
+interface NotFoundScreenProps {
+  navigation: NotFoundScreenNavigationProp
 }
 
-const NotFoundScreen = (props: Props) => {
+const NotFoundScreen: React.FC<NotFoundScreenProps> = props => {
   return (
       <View style={styles.container}>
         <Text style={styles.title}>This screen doesn't exist.</Text>

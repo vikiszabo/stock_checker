@@ -2,11 +2,11 @@ import React, {memo} from "react";
 import {StyleSheet, View} from "react-native";
 import {Text} from "native-base";
 
-interface Props {
+interface ErrorMessageProps {
     errorMsg: string
 }
 
-const ErrorMessage = (props: Props) => {
+const ErrorMessage: React.FC<ErrorMessageProps> = props => {
     return  <View style={styles.errorView}>
         <Text style={styles.errorText}>{props.errorMsg}</Text>
     </View>;

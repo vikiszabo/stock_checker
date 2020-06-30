@@ -1,7 +1,7 @@
 import React from "react";
 import {StyleSheet, TextInput} from "react-native";
 
-interface Props {
+interface SymbolInputProps {
     style?: object,
     onBlur(): void,
     onFocus(): void,
@@ -9,7 +9,7 @@ interface Props {
     onChangeText(text: string): void
 }
 
-const SymbolInput = (props: Props) => {
+const SymbolInput: React.FC<SymbolInputProps> = props => {
     return  <TextInput  {...props}
                         maxLength={5}
                         autoCapitalize="characters"

@@ -2,13 +2,13 @@ import {Text} from "native-base";
 import React, {memo} from "react";
 import {StyleSheet, View} from "react-native";
 
-export interface Props {
-    stock: object;
-    symbol: object;
+export interface StockTableProps {
+    stock: IStock;
+    symbol: ISymbol;
     style?: object;
 }
 
-const StockTable = (props: Props) => {
+const StockTable: React.FC<StockTableProps> = props => {
     return <View>
         <Text style={{...styles.symbolText, ...props.style}}>{props.symbol.symbol}</Text>
         <View style={{...styles.descriptionContainerView, ...props.style}}>

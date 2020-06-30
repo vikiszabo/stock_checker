@@ -4,7 +4,6 @@ import { Container, Form, Text } from "native-base";
 import { KeyboardAvoidingView, ScrollView, View } from "react-native";
 import axios from "axios";
 import { StackNavigationProp} from "@react-navigation/stack";
-import { RouteProp } from "@react-navigation/native";
 
 import SymbolInput from "../../components/SymbolInput";
 import SymbolButton from "../../components/SymbolButton";
@@ -16,15 +15,15 @@ import styles from "./FormScreen.styles";
 
 type FormScreenNavigationProp = StackNavigationProp<
     AppStackParamList,
-    'FormScreen'
+    "FormScreen"
     >;
 
 
-export interface Props {
+interface FormScreenProps {
   navigation: FormScreenNavigationProp;
 }
 
-export interface State {
+interface FormScreenState {
   error: boolean;
   isFocused: boolean;
   enteredSymbol: string;
@@ -32,7 +31,7 @@ export interface State {
 }
 
 
-const FormScreen = (props: Props, state: State) => {
+const FormScreen: React.FC<FormScreenProps> = props => {
   const [error, setError] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string>("");
   const [isFocused, setIsFocused] = useState(false);

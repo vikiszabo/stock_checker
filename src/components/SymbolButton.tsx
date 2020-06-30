@@ -2,12 +2,12 @@ import {Button, Text} from "native-base";
 import React from "react";
 import {StyleSheet} from "react-native";
 
-type Props = {
+type SymbolButtonProps = {
     style?: object,
     onPress(): void
 }
 
-const SymbolButton = (props: Props) => {
+const SymbolButton: React.FC<SymbolButtonProps> = props => {
     return <Button {...props}
                    primary
                    onPress={props.onPress}

@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
   header: {
     backgroundColor: "#000",
     borderBottomWidth: 0,
-    marginLeft: 4
+    marginLeft: 12
   },
   content: {
     marginLeft: 10

@@ -46,7 +46,8 @@ const styles = StyleSheet.create({
         color: "#FFF"
     },
     descriptionContainerView: {
-        margin: 4
+        marginLeft: 4,
+        marginBottom: 14,
     },
     descriptionText: {
         padding: 5,

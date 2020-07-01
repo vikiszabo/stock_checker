@@ -52,6 +52,7 @@ const FormScreen: React.FC<FormScreenProps> = props => {
   const onSymbolInputChanged = (text: string) => {
     if (text === "") {
       setError(false).then(() => setErrorMsg(error.message));
+
       setEnteredSymbol("");
       return;
     }

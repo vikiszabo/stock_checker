@@ -2,7 +2,7 @@
   "expo": {
     "name": "StockChecker",
     "description": "A stock checker app to help you keeping an eye on your investments.",
-    "slug": "StockChecker",
+    "slug": "stock-checker",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/splash.png",
@@ -20,7 +20,13 @@
       "**/*"
     ],
     "ios": {
+      "bundleIdentifier": "ch.frontchain.stockchecker",
+      "buildNumber": "1.0.0",
       "supportsTablet": true
+    },
+    "android": {
+      "package": "ch.frontchain.stockchecker",
+      "versionCode": 1
     },
     "web": {
     },
